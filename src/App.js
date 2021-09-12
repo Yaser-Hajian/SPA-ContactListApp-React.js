@@ -1,12 +1,23 @@
 import './App.css';
-import React from "react";
+import React, {useState} from "react";
+import AddContact from "./Components/AddContact/AddContact";
 
 function App() {
-  return (
-    <div className="App">
-      <h1>ContactList App</h1>
-    </div>
-  );
+    const [contactsList, setContactsList] = useState([]);
+    const addContactHandler = (contact) => {
+        // console.log({newContact})
+        const newContactsList = [...contactsList];
+        const date = new Date();
+        const newContact = {id:date.getTime() , ...contact};
+        newContactsList.unshift(newContact);
+        setContactsList(newContactsList);
+    }
+    return (
+        <div className="App">
+            <h1>ContactList App</h1>
+            <AddContact addContactHandler={addContactHandler}/>
+        </div>
+    );
 }
 
 export default App;
