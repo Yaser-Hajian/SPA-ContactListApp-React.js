@@ -39,7 +39,7 @@ const AddContact = ({addContactHandler}) => {
                     />
                 </div>
                 <div className={style.btnContainer}>
-                    <button>Add</button>
+                    <button className={style.button}>Add</button>
                 </div>
 
             </form>

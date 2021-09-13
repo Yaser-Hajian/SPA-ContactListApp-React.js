@@ -5,6 +5,10 @@ const Contact = ({name, email}) => {
         <div className={style.container}>
             <p>name: {name}</p>
             <p>email: {email}</p>
+            <div className={style.options}>
+                <button className={style.editBtn}>Edit</button>
+                <button className={style.deleteBtn}>Delete</button>
+            </div>
         </div>
     );
 };

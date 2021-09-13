@@ -17,7 +17,7 @@ input{
     margin-top: 5px;
     margin-left: 5px;
 }
-button{
+.button{
     padding: 5px 10px;
     border-radius: 5px;
     color: white;
