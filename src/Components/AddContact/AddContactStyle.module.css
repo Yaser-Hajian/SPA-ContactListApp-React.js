@@ -8,6 +8,7 @@
     padding:10px 20px;
     border-radius: 5px;
     border: 1px solid #ccc;
+    background-color: #70c0f95e;
 }
 .container{
     text-align: center;
@@ -19,6 +20,7 @@ input{
     border: 1px solid #ccc;
     margin-top: 5px;
     margin-left: 5px;
+    outline: none;
 }
 .button{
     padding: 5px 10px;
