@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import style from './AddContactStyle.module.css'
-const AddContact = ({addContactHandler}) => {
+const AddContact = (props) => {
     const [newContact , setNewContact] = useState({name:"",email:""})
     const changeHandler = (event)=>{
         setNewContact({...newContact , [event.target.name]:event.target.value});
@@ -13,8 +13,9 @@ const AddContact = ({addContactHandler}) => {
             alert("Please enter your contact's email");
         }else{
             console.log({newContact})
-            addContactHandler(newContact);
+            props.addContactHandler(newContact);
             setNewContact({name: "", email: ""});
+            props.history.push("/");
         }
     }
     return (

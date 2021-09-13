@@ -3,6 +3,8 @@ import React, {useEffect, useState} from "react";
 import AddContact from "./Components/AddContact/AddContact";
 import ContactsList from "./Components/ContactsList/ContactsList";
 import axios from "axios";
+import {BrowserRouter, Link} from "react-router-dom";
+import {Route, Switch} from "react-router";
 
 function App() {
     const [contactsList, setContactsList] = useState([]);
@@ -38,8 +40,14 @@ function App() {
     return (
         <div className="App">
             <h1>ContactList App</h1>
-            <AddContact addContactHandler={addContactHandler}/>
-            <ContactsList contactsList={contactsList} onDelete={deleteContactHandler}/>
+            <BrowserRouter>
+                <Switch>
+                    <Route path={"/add"} render={(props)=><AddContact addContactHandler={addContactHandler} {...props}/>}/>
+                    <Route path={"/"} exact={true} render={(props)=><ContactsList contactsList={contactsList} onDelete={deleteContactHandler} {...props}/>} />
+                </Switch>
+            </BrowserRouter>
+
+
         </div>
     );
 }
