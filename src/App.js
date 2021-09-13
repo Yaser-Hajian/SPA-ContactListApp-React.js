@@ -12,11 +12,15 @@ function App() {
         newContactsList.unshift(newContact);
         setContactsList(newContactsList);
     }
+    const deleteContactHandler = (id) => {
+        const newContactList = contactsList.filter(contact => contact.id !== id);
+        setContactsList(newContactList);
+    }
     return (
         <div className="App">
             <h1>ContactList App</h1>
             <AddContact addContactHandler={addContactHandler}/>
-            <ContactsList contactsList={contactsList} />
+            <ContactsList contactsList={contactsList} onDelete={deleteContactHandler}/>
         </div>
     );
 }
