@@ -1,6 +1,7 @@
 import './App.css';
 import React, {useState} from "react";
 import AddContact from "./Components/AddContact/AddContact";
+import ContactsList from "./Components/ContactsList/ContactsList";
 
 function App() {
     const [contactsList, setContactsList] = useState([]);
@@ -16,6 +17,7 @@ function App() {
         <div className="App">
             <h1>ContactList App</h1>
             <AddContact addContactHandler={addContactHandler}/>
+            <ContactsList contactsList={contactsList} />
         </div>
     );
 }
