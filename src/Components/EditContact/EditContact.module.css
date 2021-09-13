@@ -1,0 +1,17 @@
+.container{
+    width:600px;
+    margin: 10px auto;
+}
+button{
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: white;
+    background-color: #059cd9;
+    border: 1px solid #059cd9;
+    margin-top: 5px;
+    cursor: pointer;
+}
+.inputContainer{
+    display:flex;
+    align-items: center;
+}
