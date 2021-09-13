@@ -6,7 +6,7 @@ const ContactsList = ({contactsList}) => {
         <div>
             {
                 contactsList.map(contact =>(
-                    <Contact name={contact.name} email={contact.email} />
+                    <Contact name={contact.name} email={contact.email} key={contact.id}/>
                 ))
             }
         </div>

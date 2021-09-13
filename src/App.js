@@ -6,7 +6,6 @@ import ContactsList from "./Components/ContactsList/ContactsList";
 function App() {
     const [contactsList, setContactsList] = useState([]);
     const addContactHandler = (contact) => {
-        // console.log({newContact})
         const newContactsList = [...contactsList];
         const date = new Date();
         const newContact = {id:date.getTime() , ...contact};
