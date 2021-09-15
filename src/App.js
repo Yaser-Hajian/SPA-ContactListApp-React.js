@@ -10,9 +10,6 @@ import EditContact from "./Components/EditContact/EditContact";
 function App() {
     const [contactsList, setContactsList] = useState([]);
     useEffect(() => {
-        // let responseContacts=[];
-        // console.log("app")
-
         axios.get("http://localhost:3001/contacts")
             .then(response => {
                 if (response) {
@@ -24,18 +21,6 @@ function App() {
                 }
             })
             .catch(error => console.log(error));
-
-        // const refresh = async ()=>{
-        //     try {
-        //         const {data} = await axios.get("http://localhost:3001/contacts");
-        //         const newContactsList=[]
-        //         data.map(contact => { newContactsList.unshift(contact)});
-        //         setContactsList(newContactsList);
-        //     }catch(error){
-        //         console.log(error)
-        //     }
-        // }
-        // refresh();
     }, []);
     const addContactHandler = (contact) => {
         const newContactsList = [...contactsList];
