@@ -58,15 +58,8 @@ function App() {
     const editContactHandler = (id, updatedContact) => {
         console.log({id})
         const copy_contactsList = [...contactsList];
-        // const index = contactsList.indexOf(con => con.id === parseInt(id) );
-        let index;
-        for (let i = 0; i < contactsList.length; i++) {
-            if (contactsList[i].id === parseInt(id)){
-                index=i;
-            }
-        }
+        const index = contactsList.findIndex(con => con.id === parseInt(id) );
         const copy_contact = {...contactsList[index]};
-        console.log({index})
         copy_contact.name = updatedContact.name;
         copy_contact.email = updatedContact.email;
         copy_contactsList[index] = copy_contact;
