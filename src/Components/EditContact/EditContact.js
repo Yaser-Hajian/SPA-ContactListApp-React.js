@@ -24,7 +24,6 @@ const EditContact = (props) => {
         }
     }
     const editContact = ()=>{
-        console.log(contact)
         return (
             <div className={style.container}>
                 <div className={style.inputContainer}>

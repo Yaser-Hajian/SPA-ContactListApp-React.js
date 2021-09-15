@@ -3,25 +3,40 @@ import React, {useEffect, useState} from "react";
 import AddContact from "./Components/AddContact/AddContact";
 import ContactsList from "./Components/ContactsList/ContactsList";
 import axios from "axios";
-import {BrowserRouter, Link} from "react-router-dom";
+import {BrowserRouter} from "react-router-dom";
 import {Route, Switch} from "react-router";
 import EditContact from "./Components/EditContact/EditContact";
 
 function App() {
     const [contactsList, setContactsList] = useState([]);
     useEffect(() => {
+        // let responseContacts=[];
+        // console.log("app")
+
         axios.get("http://localhost:3001/contacts")
             .then(response => {
-                const newContactsList = [];
                 if (response) {
+                    const newContactsList=[]
                     response.data.map(contact => {
                         newContactsList.unshift(contact)
                     });
                     setContactsList(newContactsList);
                 }
             })
-            .catch(error => console.error(error));
-    }, [contactsList]);
+            .catch(error => console.log(error));
+
+        // const refresh = async ()=>{
+        //     try {
+        //         const {data} = await axios.get("http://localhost:3001/contacts");
+        //         const newContactsList=[]
+        //         data.map(contact => { newContactsList.unshift(contact)});
+        //         setContactsList(newContactsList);
+        //     }catch(error){
+        //         console.log(error)
+        //     }
+        // }
+        // refresh();
+    }, []);
     const addContactHandler = (contact) => {
         const newContactsList = [...contactsList];
         const date = new Date();
@@ -41,9 +56,17 @@ function App() {
             .catch(error => console.log(error));
     }
     const editContactHandler = (id, updatedContact) => {
+        console.log({id})
         const copy_contactsList = [...contactsList];
-        const index = copy_contactsList.indexOf(contact => contact.id === id);
+        // const index = contactsList.indexOf(con => con.id === parseInt(id) );
+        let index;
+        for (let i = 0; i < contactsList.length; i++) {
+            if (contactsList[i].id === parseInt(id)){
+                index=i;
+            }
+        }
         const copy_contact = {...contactsList[index]};
+        console.log({index})
         copy_contact.name = updatedContact.name;
         copy_contact.email = updatedContact.email;
         copy_contactsList[index] = copy_contact;
