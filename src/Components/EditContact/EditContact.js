@@ -1,12 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import axios from "axios";
 import style from "./EditContact.module.css";
-
+import {http} from "../../Services/HTTPService"
 const EditContact = (props) => {
     const [contact , setContact] = useState({name:"" , email:""});
     const id = props.match.params.id;
     useEffect(()=>{
-        axios.get("http://localhost:3001/contacts/"+id)
+        http.get("/contacts/"+id)
             .then(response => setContact(response.data))
             .catch(error =>console.log(error))
     },[]);

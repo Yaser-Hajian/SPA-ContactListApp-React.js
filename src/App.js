@@ -2,15 +2,14 @@ import './App.css';
 import React, {useEffect, useState} from "react";
 import AddContact from "./Components/AddContact/AddContact";
 import ContactsList from "./Components/ContactsList/ContactsList";
-import axios from "axios";
 import {BrowserRouter} from "react-router-dom";
 import {Route, Switch} from "react-router";
 import EditContact from "./Components/EditContact/EditContact";
-
+import {http} from "./Services/HTTPService";
 function App() {
     const [contactsList, setContactsList] = useState([]);
     useEffect(() => {
-        axios.get("http://localhost:3001/contacts")
+        http.get("/contacts")
             .then(response => {
                 if (response) {
                     const newContactsList=[]
@@ -28,7 +27,7 @@ function App() {
         const newContact = {id: date.getTime(), ...contact};
         newContactsList.unshift(newContact);
         setContactsList(newContactsList)
-        axios.post("http://localhost:3001/contacts", newContact)
+        http.post("/contacts", newContact)
             .then()
             .catch(error => console.log(error));
 
@@ -36,7 +35,7 @@ function App() {
     const deleteContactHandler = (id) => {
         const newContactList = contactsList.filter(contact => contact.id !== id);
         setContactsList(newContactList);
-        axios.delete("http://localhost:3001/contacts/" + id)
+        http.delete("/contacts/" + id)
             .then()
             .catch(error => console.log(error));
     }
@@ -49,7 +48,7 @@ function App() {
         copy_contact.email = updatedContact.email;
         copy_contactsList[index] = copy_contact;
         setContactsList(copy_contactsList);
-        axios.put("http://localhost:3001/contacts/" + id,updatedContact)
+        http.put("/contacts/" + id,updatedContact)
             .then()
             .catch(error => console.log(error));
     }
