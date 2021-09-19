@@ -6,8 +6,11 @@ import {BrowserRouter} from "react-router-dom";
 import {Route, Switch} from "react-router";
 import EditContact from "./Components/EditContact/EditContact";
 import {http} from "./Services/HTTPService";
+import SearchBar from "./SearchBar/SearchBar";
 function App() {
     const [contactsList, setContactsList] = useState([]);
+    const [searchValue, setSearchValue] = useState("");
+    const [searchedContacts, setSelectedContacts] = useState([])
     useEffect(() => {
         http.get("/contacts")
             .then(response => {
@@ -21,6 +24,7 @@ function App() {
             })
             .catch(error => console.log(error));
     }, []);
+    useEffect(() => {},[searchValue])
     const addContactHandler = (contact) => {
         const newContactsList = [...contactsList];
         const date = new Date();
@@ -40,7 +44,7 @@ function App() {
             .catch(error => console.log(error));
     }
     const editContactHandler = (id, updatedContact) => {
-        console.log({id})
+        // console.log({id})
         const copy_contactsList = [...contactsList];
         const index = contactsList.findIndex(con => con.id === parseInt(id) );
         const copy_contact = {...contactsList[index]};
@@ -55,6 +59,7 @@ function App() {
     return (
         <div className="App">
             <h1>ContactList App</h1>
+            <SearchBar setSearchValue={setSearchValue}/>
             <BrowserRouter>
                 <Switch>
                     <Route path={"/add"}
