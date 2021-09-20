@@ -6,11 +6,11 @@ import {BrowserRouter} from "react-router-dom";
 import {Route, Switch} from "react-router";
 import EditContact from "./Components/EditContact/EditContact";
 import {http} from "./Services/HTTPService";
-import SearchBar from "./SearchBar/SearchBar";
+import SearchBar from "./Components/SearchBar/SearchBar";
 function App() {
     const [contactsList, setContactsList] = useState([]);
     const [searchValue, setSearchValue] = useState("");
-    const [searchedContacts, setSelectedContacts] = useState([])
+    const [searchedContactsList, setSearchedContactsList] = useState([])
     useEffect(() => {
         http.get("/contacts")
             .then(response => {
@@ -20,11 +20,15 @@ function App() {
                         newContactsList.unshift(contact)
                     });
                     setContactsList(newContactsList);
+                    console.log(contactsList,"useEffect")
+                    searchHandler(searchValue , newContactsList);
                 }
             })
             .catch(error => console.log(error));
     }, []);
-    useEffect(() => {},[searchValue])
+    useEffect(() => {
+        searchHandler(searchValue);
+    },[searchValue]);
     const addContactHandler = (contact) => {
         const newContactsList = [...contactsList];
         const date = new Date();
@@ -56,6 +60,20 @@ function App() {
             .then()
             .catch(error => console.log(error));
     }
+    const searchHandler = (value , List=contactsList)=>{
+        console.log(searchValue)
+        if (value === "" || value === null){
+            setSearchedContactsList(List)
+            console.log("run if")
+            console.log({List})
+            console.log({contactsList})
+            console.log({searchedContactsList})
+        }else{
+            console.log("run else")
+            const newSearchedContactList = List.filter(contact => contact.name.toLowerCase().includes(value.toLowerCase()));
+            setSearchedContactsList(newSearchedContactList);
+        }
+    }
     return (
         <div className="App">
             <h1>ContactList App</h1>
@@ -66,14 +84,17 @@ function App() {
                            render={(props) => <AddContact addContactHandler={addContactHandler} {...props}/>}/>
                     <Route path={"/contacts/:id"} render={(props) => <EditContact editContactHandler={editContactHandler} {...props}/>}/>
                     <Route path={"/contacts"}
-                           render={(props) => <ContactsList
-                               contactsList={contactsList}
+                           render={(props) =>
+                               <ContactsList
+                               contactsList={searchedContactsList}
                                onDelete={deleteContactHandler}
                                {...props}/>}/>
-                    <Route path={"/"} exact={true} render={(props) => <ContactsList
-                                contactsList={contactsList}
+                    <Route path={"/"} exact={true} render={(props) =>
+                        <ContactsList
+                                contactsList={searchedContactsList}
                                 onDelete={deleteContactHandler}
-                                {...props}/>}/>
+                                {...props}/>}
+                    />
                 </Switch>
             </BrowserRouter>
 
