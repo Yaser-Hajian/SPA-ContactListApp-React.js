@@ -7,9 +7,9 @@ const Contact = ({name, email, onDelete , id}) => {
         <div className={style.container}>
             <div className={style.nameContainer}>
                 <img src={user} alt="user-icon"/>
-                <p className={style.name}>name: {name}</p>
+                <p className={style.name}><span>name:</span> <span className={style.nameValue}>{name}</span></p>
             </div>
-            <p>email: {email}</p>
+            <p className={style.email}><span>email:</span> <span className={style.emailValue}>{email}</span></p>
             <div className={style.options}>
                 <Link to={"/contacts/"+id}><button className={style.editBtn}>Edit</button></Link>
                 <button className={style.deleteBtn} onClick={()=>onDelete()}>Delete</button>

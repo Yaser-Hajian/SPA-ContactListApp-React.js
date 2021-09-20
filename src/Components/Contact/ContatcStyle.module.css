@@ -41,3 +41,30 @@
 .name{
     margin-left: 20px;
 }
+.nameValue , .emailValue{
+    font-weight: bold;
+}
+@media screen and (max-width: 480px) {
+   .container{
+       width: 95%;
+       flex-direction: column;
+       justify-content: flex-start;
+   }
+    .nameContainer{
+        display: flex;
+        flex-direction: column;
+    }
+    .name{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+    }
+    .email{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}
