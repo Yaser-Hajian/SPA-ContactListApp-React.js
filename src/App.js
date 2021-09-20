@@ -77,7 +77,6 @@ function App() {
     return (
         <div className="App">
             <h1>ContactList App</h1>
-            <SearchBar setSearchValue={setSearchValue}/>
             <BrowserRouter>
                 <Switch>
                     <Route path={"/add"}
@@ -88,11 +87,13 @@ function App() {
                                <ContactsList
                                contactsList={searchedContactsList}
                                onDelete={deleteContactHandler}
+                               setSearchValue={setSearchValue}
                                {...props}/>}/>
                     <Route path={"/"} exact={true} render={(props) =>
                         <ContactsList
                                 contactsList={searchedContactsList}
                                 onDelete={deleteContactHandler}
+                                setSearchValue={setSearchValue}
                                 {...props}/>}
                     />
                 </Switch>
