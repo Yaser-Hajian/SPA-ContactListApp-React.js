@@ -6,11 +6,11 @@ import {BrowserRouter} from "react-router-dom";
 import {Route, Switch} from "react-router";
 import EditContact from "./Components/EditContact/EditContact";
 import {http} from "./Services/HTTPService";
-import SearchBar from "./Components/SearchBar/SearchBar";
 function App() {
     const [contactsList, setContactsList] = useState([]);
     const [searchValue, setSearchValue] = useState("");
-    const [searchedContactsList, setSearchedContactsList] = useState([])
+    const [searchedContactsList, setSearchedContactsList] = useState([]);
+    const [isFetched , setIsFetched] = useState(false);
     useEffect(() => {
         http.get("/contacts")
             .then(response => {
@@ -20,7 +20,8 @@ function App() {
                         newContactsList.unshift(contact)
                     });
                     setContactsList(newContactsList);
-                    console.log(contactsList,"useEffect")
+                    setIsFetched(true)
+                    // console.log(contactsList,"useEffect")
                     searchHandler(searchValue , newContactsList);
                 }
             })
@@ -28,7 +29,7 @@ function App() {
     }, []);
     useEffect(() => {
         searchHandler(searchValue);
-    },[searchValue]);
+    },[searchValue , contactsList]);
     const addContactHandler = (contact) => {
         const newContactsList = [...contactsList];
         const date = new Date();
@@ -61,15 +62,9 @@ function App() {
             .catch(error => console.log(error));
     }
     const searchHandler = (value , List=contactsList)=>{
-        console.log(searchValue)
         if (value === "" || value === null){
             setSearchedContactsList(List)
-            console.log("run if")
-            console.log({List})
-            console.log({contactsList})
-            console.log({searchedContactsList})
         }else{
-            console.log("run else")
             const newSearchedContactList = List.filter(contact => contact.name.toLowerCase().includes(value.toLowerCase()));
             setSearchedContactsList(newSearchedContactList);
         }
@@ -85,15 +80,21 @@ function App() {
                     <Route path={"/contacts"}
                            render={(props) =>
                                <ContactsList
-                               contactsList={searchedContactsList}
+                               searchedContacts={searchedContactsList}
                                onDelete={deleteContactHandler}
                                setSearchValue={setSearchValue}
+                               allContacts={contactsList}
+                               searchValue={searchValue}
+                               isFetched={isFetched}
                                {...props}/>}/>
                     <Route path={"/"} exact={true} render={(props) =>
                         <ContactsList
-                                contactsList={searchedContactsList}
+                                searchedContacts={searchedContactsList}
                                 onDelete={deleteContactHandler}
                                 setSearchValue={setSearchValue}
+                                allContacts={contactsList}
+                                searchValue={searchValue}
+                                isFetched={isFetched}
                                 {...props}/>}
                     />
                 </Switch>

@@ -3,15 +3,15 @@ import Contact from "../Contact/Contact";
 import {Link} from "react-router-dom";
 import style from './ContactsListStyle.module.css';
 import SearchBar from "../SearchBar/SearchBar";
-const ContactsList = ({contactsList , onDelete , setSearchValue}) => {
+const ContactsList = ({searchedContacts , onDelete , setSearchValue , allContacts , searchValue , isFetched}) => {
     return (
         <div>
             <Link to={"/add"}><button className={style.addNewBtn}>Add new contact</button></Link>
             <h2>Contacts</h2>
             <SearchBar setSearchValue={setSearchValue}/>
             {
-                contactsList.length !== 0 ?
-                contactsList.map(contact =>(
+                searchedContacts.length !== 0 ?
+                searchedContacts.map(contact =>(
                     <Contact
                         name={contact.name}
                         email={contact.email}
@@ -21,7 +21,11 @@ const ContactsList = ({contactsList , onDelete , setSearchValue}) => {
                     />
                 ))
                     :
-                <p>You don't have any contacts</p>
+                    allContacts.length !== 0 ?
+                        ( searchValue === ""?<p className={style.info}>Loading contacts ...</p>:<p className={style.info}>no contact matched</p>)
+                        :
+                        isFetched?<p className={style.info}>You don't have any contacts</p>:<p className={style.info}>Loading contacts ...</p>
+
             }
         </div>
     );

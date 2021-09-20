@@ -1,29 +1,9 @@
 {
   "contacts": [
     {
-      "id": 1631546190954,
-      "name": "naghi",
-      "email": "mohammadyaser1379@gmail.com."
-    },
-    {
-      "id": 1631546498689,
-      "name": "ali",
-      "email": "123@alialavi"
-    },
-    {
-      "id": 1631550896475,
+      "id": 1632118007356,
       "name": "yaser",
-      "email": "yaser@yaser2.com"
-    },
-    {
-      "id": 1631730561502,
-      "name": "hasan2",
-      "email": "hasan@hasan"
-    },
-    {
-      "id": 1631774894477,
-      "name": "ali",
-      "email": "ali@ali.com"
+      "email": "mohammadyaser1379@gmail.com"
     }
   ]
 }
