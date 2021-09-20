@@ -5,8 +5,10 @@ import {Link} from "react-router-dom";
 const Contact = ({name, email, onDelete , id}) => {
     return (
         <div className={style.container}>
-            <img src={user} alt="user-icon"/>
-            <p>name: {name}</p>
+            <div className={style.nameContainer}>
+                <img src={user} alt="user-icon"/>
+                <p className={style.name}>name: {name}</p>
+            </div>
             <p>email: {email}</p>
             <div className={style.options}>
                 <Link to={"/contacts/"+id}><button className={style.editBtn}>Edit</button></Link>

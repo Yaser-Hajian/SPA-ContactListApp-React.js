@@ -33,3 +33,11 @@
 .container img{
     width: 30px;
 }
+.nameContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.name{
+    margin-left: 20px;
+}
